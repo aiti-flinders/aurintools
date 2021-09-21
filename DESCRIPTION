@@ -8,7 +8,7 @@ Authors@R:
            email = "hamish.gamble@flinders.edu.au",
            comment = c(ORCID = "YOUR-ORCID-ID"))
 Description: aurintools provides an interface between R and the AURIN API. It provides functions that should
-help you do what you need to do to download data from the AURIN portal, and read it into R.
+        help you do what you need to do to download data from the AURIN portal, and read it into R.
 License: MIT + file LICENSE
 Suggests: 
     testthat (>= 3.0.0)
@@ -22,6 +22,9 @@ Imports:
     gdalUtils,
     rgdal,
     tidyr,
-    jsonlite
+    jsonlite,
+    rlang,
+    here,
+    xml2
 Depends: 
     sf
