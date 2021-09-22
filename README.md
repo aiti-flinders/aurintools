@@ -31,14 +31,10 @@ if (!require(remotes)) {
   install.packages("remotes")
   library(remotes)
 }
-#> Loading required package: remotes
 #> Warning: package 'remotes' was built under R version 4.0.5
-
 remotes::install_github("aiti-flinders/aurintools")
 library(aurintools)
-#> Loading required package: sf
 #> Warning: package 'sf' was built under R version 4.0.5
-#> Linking to GEOS 3.9.0, GDAL 3.2.1, PROJ 7.2.1
 ```
 
 ## Authorising access to the AURIN API.
@@ -62,9 +58,9 @@ your provided password. This function will create a file called
 
 First, determine the API ID for the dataset you are interested. You can
 browse AURIN datasets at <https://data.aurin.org.au/> or using the in
-built function `aurin_id()`. This returns the top 10 results for
-your search term. If you know the exact title of the dataset, use that as
-your search term, and specify `exact = TRUE`.
+built function `aurin_id()`. This returns up to 10 results for your
+search term. If you know the exact name of the dataset, use that as your
+search term, and specify `exact = TRUE`.
 
 ``` r
 #Search for a dataset
@@ -72,17 +68,15 @@ aurin_id("toilets")
 #> Multiple AURIN datasets found. If you know the exact name of the dataset you are looking for, specify `exact = TRUE`.
 #>             
 #> You can likely copy and paste the title from the data below, if the search was successful.
-#> # A tibble: 6 x 2
-#>   title                                                  name                   
-#>   <chr>                                                  <chr>                  
-#> 1 Public Toilets 2004-2014 for Australia                 uq-erg-public-toilets-~
-#> 2 DSS - National Public Toilets (Point) 2017             au-govt-dss-national-p~
-#> 3 Department of Health - National Toilet Map - June 2018 au-govt-doh-national-t~
-#> 4 SAHEALTH - Playground and Amenities (point) 2014       sa-govt-sa-health-adh-~
-#> 5 SA DEW - Parks - Features and Facilities (point) 2015  sa-govt-dew-adh-dew-sa~
-#> 6 VIC DELWP - Recreation Assets (Points)                 vic-govt-delwp-datavic~
-
-
+#> # A tibble: 6 x 1
+#>   title                                                 
+#>   <chr>                                                 
+#> 1 Public Toilets 2004-2014 for Australia                
+#> 2 DSS - National Public Toilets (Point) 2017            
+#> 3 Department of Health - National Toilet Map - June 2018
+#> 4 SAHEALTH - Playground and Amenities (point) 2014      
+#> 5 SA DEW - Parks - Features and Facilities (point) 2015 
+#> 6 VIC DELWP - Recreation Assets (Points)
 #Get the API ID for a specific dataset
 toilets_id <- aurin_id("DSS - National Public Toilets (Point) 2017", exact = TRUE)
 ```
@@ -90,8 +84,7 @@ toilets_id <- aurin_id("DSS - National Public Toilets (Point) 2017", exact = TRU
 Once you have the API ID for the data you are interested, you can
 download it. Currently, the only option is to download the file as a
 .geoJSON. By default, the file will be downloaded to a folder in your
-current directory called `out`. If the download is successful, the
-console will return `character(0)`.
+current directory called `out`.
 
 ``` r
 toilets <- aurin_download_file(api_id = toilets_id, 
@@ -99,15 +92,13 @@ toilets <- aurin_download_file(api_id = toilets_id,
                     out_folder = "out")
 
 toilets_data <- read_aurin(toilets)
-#> Reading layer `aurin:datasource-AU_Govt_DSS-UoM_AURIN_national_public_toilets_2017' from data source 
-#>   `C:\Users\gamb0043\OneDrive - Flinders\Projects\R\aiti-flinders\aurintools\out\toilets.geoJSON' 
+#> Reading layer `aurin:datasource-AU_Govt_DSS-UoM_AURIN_national_public_toilets_2017' from data source `C:\Users\gamb0043\OneDrive - Flinders\Projects\R\aiti-flinders\aurintools\out\toilets.geoJSON' 
 #>   using driver `GeoJSON'
 #> Simple feature collection with 18789 features and 46 fields
 #> Geometry type: POINT
 #> Dimension:     XY
 #> Bounding box:  xmin: 113.4102 ymin: -43.582 xmax: 153.6263 ymax: -10.5702
 #> Geodetic CRS:  GDA94
-
 toilets_data
 #> Simple feature collection with 18789 features and 46 fields
 #> Geometry type: POINT
@@ -115,17 +106,17 @@ toilets_data
 #> Bounding box:  xmin: 113.4102 ymin: -43.582 xmax: 153.6263 ymax: -10.5702
 #> Geodetic CRS:  GDA94
 #> First 10 features:
-#>                                                                                          gml_id
-#> 1  datasource-AU_Govt_DSS-UoM_AURIN_national_public_toilets_2017.fid--52980058_17c06c905f3_1284
-#> 2  datasource-AU_Govt_DSS-UoM_AURIN_national_public_toilets_2017.fid--52980058_17c06c905f3_1285
-#> 3  datasource-AU_Govt_DSS-UoM_AURIN_national_public_toilets_2017.fid--52980058_17c06c905f3_1286
-#> 4  datasource-AU_Govt_DSS-UoM_AURIN_national_public_toilets_2017.fid--52980058_17c06c905f3_1287
-#> 5  datasource-AU_Govt_DSS-UoM_AURIN_national_public_toilets_2017.fid--52980058_17c06c905f3_1288
-#> 6  datasource-AU_Govt_DSS-UoM_AURIN_national_public_toilets_2017.fid--52980058_17c06c905f3_1289
-#> 7  datasource-AU_Govt_DSS-UoM_AURIN_national_public_toilets_2017.fid--52980058_17c06c905f3_128a
-#> 8  datasource-AU_Govt_DSS-UoM_AURIN_national_public_toilets_2017.fid--52980058_17c06c905f3_128b
-#> 9  datasource-AU_Govt_DSS-UoM_AURIN_national_public_toilets_2017.fid--52980058_17c06c905f3_128c
-#> 10 datasource-AU_Govt_DSS-UoM_AURIN_national_public_toilets_2017.fid--52980058_17c06c905f3_128d
+#>                                                                                         gml_id
+#> 1  datasource-AU_Govt_DSS-UoM_AURIN_national_public_toilets_2017.fid--192d859_17c0c4f5985_-6aa
+#> 2  datasource-AU_Govt_DSS-UoM_AURIN_national_public_toilets_2017.fid--192d859_17c0c4f5985_-6a9
+#> 3  datasource-AU_Govt_DSS-UoM_AURIN_national_public_toilets_2017.fid--192d859_17c0c4f5985_-6a8
+#> 4  datasource-AU_Govt_DSS-UoM_AURIN_national_public_toilets_2017.fid--192d859_17c0c4f5985_-6a7
+#> 5  datasource-AU_Govt_DSS-UoM_AURIN_national_public_toilets_2017.fid--192d859_17c0c4f5985_-6a6
+#> 6  datasource-AU_Govt_DSS-UoM_AURIN_national_public_toilets_2017.fid--192d859_17c0c4f5985_-6a5
+#> 7  datasource-AU_Govt_DSS-UoM_AURIN_national_public_toilets_2017.fid--192d859_17c0c4f5985_-6a4
+#> 8  datasource-AU_Govt_DSS-UoM_AURIN_national_public_toilets_2017.fid--192d859_17c0c4f5985_-6a3
+#> 9  datasource-AU_Govt_DSS-UoM_AURIN_national_public_toilets_2017.fid--192d859_17c0c4f5985_-6a2
+#> 10 datasource-AU_Govt_DSS-UoM_AURIN_national_public_toilets_2017.fid--192d859_17c0c4f5985_-6a1
 #>    toilet_id                                  url             name
 #> 1        341  https://toiletmap.gov.au/toilet/341 Elsie Jones Park
 #> 2        418  https://toiletmap.gov.au/toilet/418        Lucky Bay
