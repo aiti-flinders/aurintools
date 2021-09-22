@@ -62,8 +62,8 @@ your provided password. This function will create a file called
 
 First, determine the API ID for the dataset you are interested. You can
 browse AURIN datasets at <https://data.aurin.org.au/> or using the in
-built function `fetch_aurin_id()`. This returns the top 10 results for
-your search term. If you know the exact name of the dataset, use that as
+built function `aurin_id()`. This returns the top 10 results for
+your search term. If you know the exact title of the dataset, use that as
 your search term, and specify `exact = TRUE`.
 
 ``` r
