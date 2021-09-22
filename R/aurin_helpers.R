@@ -33,7 +33,7 @@ aurin_id <- function(search, exact = FALSE) {
     message("Multiple AURIN datasets found. If you know the exact name of the dataset you are looking for, specify `exact = TRUE`.
             \nYou can likely copy and paste the title from the data below, if the search was successful.")
     results %>%
-      dplyr::distinct(.data$title,  .data$name)
+      dplyr::distinct(.data$title)
 
   }
 
