@@ -34,7 +34,7 @@ if (!require(remotes)) {
 #> Loading required package: remotes
 #> Warning: package 'remotes' was built under R version 4.0.5
 
-#remotes::install_github("aiti-flinders/aurintools")
+remotes::install_github("aiti-flinders/aurintools")
 library(aurintools)
 #> Loading required package: sf
 #> Warning: package 'sf' was built under R version 4.0.5
