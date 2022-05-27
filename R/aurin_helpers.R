@@ -118,7 +118,7 @@ aurin_download_file <- function(api_id,
 
   datasource_name <- here::here(paste0(out_folder,"/", out_file_name, ".geoJSON"))
 
-  gdalUtils::ogr2ogr(src_datasource_name = here::here("aurin_wfs_connection.xml"),
+  gdalUtilities::ogr2ogr(src_datasource_name = here::here("aurin_wfs_connection.xml"),
                      dst_datasource_name = datasource_name,
                      layer = api_id,
                      f = "GeoJSON",
